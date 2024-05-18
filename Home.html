@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solent School</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/Banner.png" width= 100% alt="Solent School Logo">
+      <h1>Solent School</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/activities">Activities</a></li>
+        <li><a href="/modules">Modules</a></li>
+        <li><a href="/registration">Registration</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    Main content goes here
+  </main>
+
+  <footer>
+    <div class="contact">
+      <h3>Contact</h3>
+      <p>Address: 123 Main Street, Southampton</p>
+      <p>Visitor Counter: <span id="visitorCount">0</span></p>
+    </div>
+    <div class="about">
+      <h3>About</h3>
+      <p>Select Language:</p>
+      <select id="langSelect" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+      </select>
+      <p id="aboutText">Welcome to Solent School!</p>
+    </div>
+    <div class="social">
+      <h3>Follow Us</h3>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

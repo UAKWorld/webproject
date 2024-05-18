@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration - Solent School</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header and Navigation -->
+  <!-- (Same as the main HTML file) -->
+
+  <main>
+    <section class="registration-content">
+      <h2>Registration Form</h2>
+      <form id="registrationForm" onsubmit="sendFormData(event)">
+        <label for="firstName">First Name*:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="surname">Surname*:</label>
+        <input type="text" id="surname" name="surname" required>
+
+        <label for="mobileNumber">Mobile Number*:</label>
+        <input type="tel" id="mobileNumber" name="mobileNumber" pattern="[0-9]{11}" required>
+
+        <label for="gender">Gender*:</label>
+        <div>
+          <input type="radio" id="male" name="gender" value="male" required>
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="gender" value="female" required>
+          <label for="female">Female</label>
+          <input type="radio" id="other" name="gender" value="other" required>
+          <label for="other">Other</label>
+        </div>
+
+        <label for="password">Password*:</label>
+        <input type="password" id="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required>
+
+        <label for="confirmPassword">Confirm Password*:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments"></textarea>
+
+        <button type="submit">Submit</button>
+        <div id="formMessage"></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <!-- (Same as the main HTML file) -->
+
+  <script src="js/script.js"></script>
+  <script>
+    function validateForm() {
+      const form = document.getElementById('registrationForm');
+      const firstName = form.elements.firstName.value.trim();
+      const surname = form.elements.surname.value.trim();
+      const mobileNumber = form.elements.mobileNumber.value.trim();
+      const gender = form.elements.gender.value;
+      const password = form.elements.password.value;
+      const confirmPassword = form.elements.confirmPassword.value;
+
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      const mobileNumberRegex = /^\d{11}$/;
+
+      let isValid = true;
+      let message = '';
+
+      if (firstName === '') {
+        isValid = false;
+        message += 'First Name is required.\n';
+      }
+
+      if (surname === '') {
+        isValid = false;
+        message += 'Surname is required.\n';
+      }
+
+      if (!mobileNumberRegex.test(mobileNumber)) {
+        isValid = false;
+        message += 'Mobile Number must be 11 digits.\n';
+      }
+
+      if (!gender) {
+        isValid = false;
+        message += 'Gender is required.\n';
+      }
+
+      if (!passwordRegex.test(password)) {
+        isValid = false;
+        message += 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.\n';
+      }
+
+      if (password !== confirmPassword) {
+        isValid = false;
+        message += 'Passwords do not match.\n';
+      }
+
+      if (!isValid) {
+        document.getElementById('formMessage').textContent = message;
+        return false;
+      }
+
+      return true;
+    }
+
+    function sendFormData(event) {
+      event.preventDefault();
+
+      if (validateForm()) {
+        const form = document.getElementById('registrationForm');
+        const formData = new FormData(form);
+        const formDataString = new URLSearchParams(formData).toString();
+
+        const mailtoLink = `mailto:akuppari@gmail.com?subject=Registration Form Data&body=${encodeURIComponent(formDataString)}`;
+        window.location.href = mailtoLink;
+      }
+    }
+  </script>
+</body>
+</html>
