@@ -3,82 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modules - Solent School</title>
+  <title>Modules - Greenfield College</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .average-css {
+      font-weight: 600 !important;
+      background-color: #333 !important;
+      color: white !important;
+    }
+  </style>
 </head>
 <body>
   <!-- Header and Navigation -->
+  <header>
+      <h1 class="header-title">Greenfield College</h1>
+    
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/activities" >Activities</a></li>
+      <li><a href="/modules" class="nav-active">Modules</a></li>
+      <li><a href="/registration">Registration</a></li>
+    </ul>
+  </nav>
   <!-- (Same as the main HTML file) -->
 
   <main>
     <section class="modules-content">
-      <h2>Modules</h2>
+      <h2 class="text-center">Modules</h2>
       <table id="modulesTable">
+      
         <thead>
           <tr>
-            <th onclick="sortTable(0)">ID</th>
-            <th onclick="sortTable(1)">Name</th>
-            <th onclick="sortTable(2)">Semester</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Semester</th>
+            <th>Course</th>
+            <th>Description</th>
           </tr>
         </thead>
+        <tfoot style="display: table-row-group">
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Semester</td>
+            <td>Course</td>
+            <td>Description</td>
+          </tr>
+        </tfoot>
         <tbody>
+         
           <tr>
             <td>101</td>
             <td>Introduction to Programming</td>
             <td>1</td>
+            <td>Computer Engineering</td>
+            <td>this is some random description</td>
           </tr>
           <tr>
             <td>202</td>
             <td>Data Structures and Algorithms</td>
             <td>2</td>
+            <td>Computer Engineering</td>
+            <td>this is some random description</td>
+
           </tr>
           <!-- Add more rows for other modules -->
         </tbody>
+        
+       
       </table>
     </section>
   </main>
 
   <!-- Footer -->
+  <footer>
+    <div class="contact">
+      <h3>Contact</h3>
+      <p>Address: 123 Main Street, Southampton</p>
+      <p>Visitor Counter: <span id="visitorCount">0</span></p>
+    </div>
+    <div class="about">
+      <h3 >About</h3>
+      <p>Select Language:</p>
+      <select id="langSelect" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+      </select>
+      <p id="aboutText">Welcome to Solent School!</p>
+    </div>
+    <div class="social">
+      <h3>Follow Us</h3>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </footer>
   <!-- (Same as the main HTML file) -->
 
   <script src="js/script.js"></script>
+  <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+ 
+
   <script>
-    function sortTable(n) {
-      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-      table = document.getElementById("modulesTable");
-      switching = true;
-      dir = "asc";
-      while (switching) {
-        switching = false;
-        rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
-          shouldSwitch = false;
-          x = rows[i].getElementsByTagName("TD")[n];
-          y = rows[i + 1].getElementsByTagName("TD")[n];
-          if (dir == "asc") {
-            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-              shouldSwitch = true;
-              break;
+    $(document).ready(function () {
+        const myHeaders = ['ID', 'Name', 'Semester', 'Description'];
+        let i=0;
+        // Initialize DataTable
+        new DataTable('#modulesTable', {
+            "order": [],
+            fixedHeader: false,
+            createdRow: function(row, data, index) {
+              console.log(row);
+              if (data[0] == "ID") {
+                $(row).addClass("average-css");
+              }
+            },
+            initComplete: function () {
+                var api = this.api();
+                api.columns().every(function () {
+                    var column = this;
+
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.header()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().each(function (d, j) {
+                        if(!myHeaders.includes(d))
+                        {
+                          select.append('<option value="' + d + '">' + d + '</option>');
+                        }
+                    });
+
+                    i++;
+
+                });
             }
-          } else if (dir == "desc") {
-            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-              shouldSwitch = true;
-              break;
-            }
-          }
-        }
-        if (shouldSwitch) {
-          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-          switching = true;
-          switchcount ++;
-        } else {
-          if (switchcount == 0 && dir == "asc") {
-            dir = "desc";
-            switching = true;
-          }
-        }
-      }
-    }
-  </script>
+        });
+    });
+
+    $('#number').empty().append('ID');
+</script>
+
 </body>
 </html>

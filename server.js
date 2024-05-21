@@ -24,6 +24,10 @@ app.get("/registration", (req, res) => {
   res.sendFile(path.join(__dirname + "/Registration.html"));
 });
 
+app.get("/info", (req, res) => {
+  res.sendFile(path.join(__dirname + "/info.html"));
+});
+
 
 const server = app.listen(process.env.PORT||3000);
 const portNumber = server.address().port;
