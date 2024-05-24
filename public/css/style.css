@@ -6,10 +6,14 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
   line-height: 1.6;
-  display:grid;
+  display: grid;
   min-height: 100vh;
+}
+
+body>* {
+  font-family: "Teachers", sans-serif;
+
 }
 
 /* Header styles */
@@ -19,18 +23,19 @@ header {
   height: 250px;
   background-image: url('../img/Banner.png');
   text-align: center;
- 
+
 }
 
-.header-title{
- font-size: 100px;
- font-weight: 900;
- margin-left: 20px;
- letter-spacing: 5px;
- margin-top:3%;
+.header-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 700%;
+  font-weight: 700;
+  margin-left: 20px;
+  letter-spacing: 5px;
+  margin-top: 3%;
 }
 
-nav{
+nav {
   background-color: #333;
   padding: 15px;
 }
@@ -42,19 +47,24 @@ nav ul {
 }
 
 nav ul li a {
+  font-family: "Comfortaa", sans-serif;
   color: #fff;
   text-decoration: none;
-  font-size:20px;
-} 
+  padding-top: 30px;
+  font-size: 25px;
+}
 
+footer>* {
+  font-family: "Comfortaa", sans-serif;
+}
 
 .logo {
   display: flex;
   justify-content: space-between;
 }
 
-.nav-active{
-  color: #f54242!important;
+.nav-active {
+  color: #f54242 !important;
 }
 
 /* 
@@ -75,7 +85,7 @@ nav ul li {
 
 
 /* main section styles */
-main{
+main {
   flex-grow: 1;
   /* margin-top:80px; */
 }
@@ -138,23 +148,23 @@ footer ul li a {
   text-align: center;
 }
 
-.card-custom{
-  height:600px!important;
+.card-custom {
+  height: 600px !important;
 }
 
-.custom-card-image{
-  height: 350px!important;
+.custom-card-image {
+  height: 350px !important;
 }
 
-.hyperlink{
-  padding-bottom:8px;
+.hyperlink {
+  padding-bottom: 8px;
 }
 
-.bold-h5{
+.bold-h5 {
   font-weight: bold;
 }
 
-.buidling-image{
+.buidling-image {
   border-radius: 10px;
 }
 
@@ -178,6 +188,10 @@ footer ul li a {
   height: auto;
 }
 
+.custom-icon-margin {
+  margin: 5px !important;
+}
+
 /* Activities Page Styles */
 .activities-content {
   padding: 20px;
@@ -188,7 +202,7 @@ footer ul li a {
   text-align: center;
 }
 
-.activity-img{
+.activity-img {
   border-radius: 10px;
 }
 
@@ -221,11 +235,11 @@ footer ul li a {
 }
 
 #modulesTable {
-  width: 100%;
   border-collapse: collapse;
 }
 
-#modulesTable th, #modulesTable td {
+#modulesTable th,
+#modulesTable td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -236,7 +250,7 @@ footer ul li a {
   cursor: pointer;
 }
 
-.justify-custom{
+.justify-custom {
   text-align: justify;
 }
 

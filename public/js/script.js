@@ -1,8 +1,5 @@
-// Visitor counter
-let visitorCount = localStorage.getItem('visitorCount') || 0;
-document.getElementById('visitorCount').textContent = visitorCount;
-visitorCount++;
-localStorage.setItem('visitorCount', visitorCount);
+
+
 
 // Language dropdown
 function changeLanguage(lang) {
@@ -10,16 +7,29 @@ function changeLanguage(lang) {
   let aboutText;
   switch (lang) {
     case 'en':
-      aboutText = 'Welcome to Solent School!';
+      aboutText = 'Welcome to Greenfield College!';
       break;
     case 'fr':
-      aboutText = 'Bienvenue à l\'école Solent!';
+      aboutText = 'Bienvenue au Collège Greenfield!';
       break;
     case 'es':
-      aboutText = '¡Bienvenido a la escuela Solent!';
+      aboutText = '¡Bienvenidos a Greenfield College!';
       break;
     default:
-      aboutText = 'Welcome to Solent School!';
+      aboutText = 'Welcome to Greenfield College!';
   }
   document.getElementById('aboutText').textContent = aboutText;
 }
+
+$(document).ready(function(){
+  $.ajax({
+    url:'/getvistorcount',
+    type:'GET'
+  }).done(function(data){
+    if(data.usersCount !== undefined)
+    {
+      $('#visitorCount').empty().append(data.usersCount);
+    }
+
+  });
+});

@@ -9,6 +9,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2"
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "express-visitor-counter": "^1.5.1",
+    "mysql2": "^3.9.7",
+    "querystring": "^0.2.1"
   }
 }
